@@ -1,0 +1,104 @@
+import random
+from animation import Animation, Sprite
+
+class BouncySprite(Animation):
+    def __init__(self, init_x, init_y, the_sprite):
+        self.name = "bouncy ball"
+        self.current_x = init_x
+        self.current_y = init_y
+        self.delta_x = 0
+        self.delta_y = 0
+        self.sprite = the_sprite
+
+        self.trapx_min = 10
+        self.trapx_max = 12
+        self.trapy_min = 6
+        self.trapy_max = 8
+
+        if init_x == -1:
+            self.current_x = random.randint(0, 13)
+
+        if init_y == -1:
+            self.current_y = random.randint(2, 6)
+
+    def draw_frame(self, display, hardware_buffering):
+        # print("Drawing on frame %d" % display._frame)
+
+        if (self.delta_x == 0 and self.delta_y == 0):
+            self.draw_ball(display, False)
+            # Just starting out. Send the ball bouncing down and to the right 
+            self.delta_x = 1
+            self.delta_y = 1
+
+            return False
+        else:
+            if not hardware_buffering:
+                self.draw_ball(display, True)
+
+            # Update the ball to the next position
+            self.current_x = self.current_x + self.delta_x
+            self.current_y = self.current_y + self.delta_y
+
+            if self.current_x+2 > display.width-1 or self.current_x-2 < 0:
+                self.delta_x = -self.delta_x
+                self.current_x = self.current_x + self.delta_x
+
+            if self.current_y+2 > display.height-1 or self.current_y-2 < 0:
+                self.delta_y = -self.delta_y
+                self.current_y = self.current_y + self.delta_y
+
+            # Draw the trap
+            # self.draw_trap(display)
+
+            # Finally, draw the ball
+            self.draw_ball(display, False)
+
+            return self.in_trap(display)
+
+
+    def draw_ball(self, display, do_undraw):
+        # The current_x and current_y coordinates should hold the current center of the ball.
+        # We will translate the sprite data based on that
+        min_x = self.current_x - int(self.sprite.sprite_width / 2)
+        max_x = self.current_x + int(self.sprite.sprite_width / 2)
+        min_y = self.current_y - int(self.sprite.sprite_height / 2)
+        max_y = self.current_y + int(self.sprite.sprite_height / 2)
+
+        sprite_current_x = 0
+        sprite_current_y = 0
+
+        for i in range(min_y, max_y+1):
+            for j in range(min_x, max_x+1):
+                brightness = 0
+                if not do_undraw:
+                    # Grab brightness of pixel at the sprite's coordinates.
+                    brightness = self.sprite.sprite_data[sprite_current_y][sprite_current_x]
+
+                display.pixel(j, i, brightness)
+                sprite_current_x = sprite_current_x + 1
+
+            sprite_current_x = 0
+            sprite_current_y = sprite_current_y + 1
+
+    def draw_trap(self, display):
+        for i in range(self.trapx_min, self.trapx_max + 1):
+            display.pixel(i, self.trapy_min, 50)
+
+        display.pixel(self.trapx_min, 7, 50)
+        display.pixel(self.trapx_max, 7, 50)    
+
+        for i in range(self.trapx_min, self.trapx_max + 1):
+            display.pixel(i, self.trapy_max, 50)
+
+
+    def in_trap(self, display):
+        in_trap = False
+        # if (self.current_x >= self.trapx_min and self.current_x <= self.trapx_max):
+        #     if (self.current_y >= self.trapy_min and self.current_y <= self.trapy_max):
+        #         # Ball has fallen into trap. Stop the animation
+        #         print("Ball has fallen into trap!")
+        #         display.fill(0)
+        #         in_trap = True
+
+        return in_trap    
+    

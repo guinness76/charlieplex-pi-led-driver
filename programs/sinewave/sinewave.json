@@ -1,0 +1,65 @@
+{
+    "repeating": true,
+    "frames": [
+        {
+            "enabled": true,
+            "duration_ms": 100,
+            "iterations": 1,
+            "animations": [
+                {
+                    "name": "sinewave",
+                    "init_x": 0,
+                    "init_y": 0,
+                    "max_x": 6,
+                    "max_y": 8,
+                    "invert": true
+                }
+            ]
+        },
+        {
+            "enabled": true,
+            "duration_ms": 100,
+            "iterations": 1,
+            "animations": [
+                {
+                    "name": "sinewave",
+                    "init_x": 6,
+                    "init_y": 0,
+                    "max_x": 10,
+                    "max_y": 4,
+                    "invert": true
+                }
+            ]
+        },
+        {
+            "enabled": true,
+            "duration_ms": 100,
+            "iterations": 1,
+            "animations": [
+                {
+                    "name": "sinewave",
+                    "init_x": 10,
+                    "init_y": 0,
+                    "max_x": 13,
+                    "max_y": 2,
+                    "invert": true
+                }
+            ]
+        },
+        {
+            "enabled": true,
+            "duration_ms": 100,
+            "iterations": 1,
+            "animations": [
+                {
+                    "name": "sinewave",
+                    "init_x": 13,
+                    "init_y": 0,
+                    "max_x": 15,
+                    "max_y": 1,
+                    "invert": true
+                }
+            ]
+        }
+    ]
+}

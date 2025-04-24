@@ -1,0 +1,31 @@
+{
+    "repeating": false,
+    "frames": [
+        {
+            "enabled": true,
+            "duration_ms": 100,
+            "iterations": -1,
+            "animations": [
+                {
+                    "name": "bouncy ball",
+                    "init_x": 1,
+                    "init_y": -1,
+                    "sprites": [
+                        {
+                            "name": "static sprite",
+                            "start_x": 10,
+                            "start_y": 6,
+                            "sprite_width": 3,
+                            "sprite_height": 3,
+                            "sprite_data": [ 
+                            [50,  50,  50],
+                            [50,   0,  50],
+                            [50,  50,  50]
+                            ]
+                        }
+                    ] 
+                }
+            ]
+        }
+    ]
+}

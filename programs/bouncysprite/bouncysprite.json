@@ -1,0 +1,80 @@
+{
+    "repeating": false,
+    "frames": [
+        {
+            "enabled": true,
+            "duration_ms": 150,
+            "iterations": -1,
+            "animations": [
+                {
+                    "name": "bouncy sprite",
+                    "init_x": 2,
+                    "init_y": -1,
+                    "sprites": [
+                        {
+                            "name": "sphere",
+                            "sprite_width": 5,
+                            "sprite_height": 5,
+                            "init_x": -1,
+                            "init_y": -1,
+                            "sprite_data": [ 
+                                [  0,   5,  15,   5,   0],
+                                [  5,  50,  50,  50,   5],
+                                [ 15,  50, 150,  50,  15],
+                                [  5,  50,  50,  50,   5],
+                                [  0,   5,  15,   5,   0]
+                            ]
+                        }
+                    ]
+                    
+                },
+                {
+                    "name": "bouncy sprite",
+                    "init_x": 10,
+                    "init_y": -1,
+                    "sprites": [
+                        {
+                            "name": "triangle",
+                            "sprite_width": 5,
+                            "sprite_height": 3,
+                            "init_x": -1,
+                            "init_y": -1,
+                            "sprite_data": [ 
+                                [  0,   0,   15,   0,   0],
+                                [  0,  15,  100,  15,   0],
+                                [  15, 100, 100, 100,  15]
+                            ]
+                        }
+                    ]
+                    
+                }
+            ]
+        },
+        {
+            "enabled": false,
+            "duration_ms": 250,
+            "iterations": -1,
+            "animation": {
+                "name": "bouncy sprite",
+                "init_x": 3,
+                "init_y": -1,
+                "sprites": [
+                    {
+                        "name": "heart",
+                        "sprite_width": 7,
+                        "sprite_height": 5,
+                        "init_x": -1,
+                        "init_y": -1,
+                        "sprite_data": [
+                            [  0,  15,   0,  0,    0,  15,   0],
+                            [ 15,  50,	25,	 5,   25,  50,	15],    
+                            [  0,  25,	100, 50, 100,  25,	 0],
+                            [  0,	0,	 25, 100,  25,	0,	 0],
+                            [  0,	0,	  0,  50,	0,	0,	 0]
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

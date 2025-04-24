@@ -1,0 +1,40 @@
+{
+    "repeating": false,
+    "frames": [
+        {
+            "enabled": true,
+            "duration_ms": 150,
+            "iterations": 1,
+            "animations": [
+                {
+                    "name": "marquee",
+                    "message": " {cat1}",
+                    "sprites": [
+                        {
+                            "name": "1",
+                            "sprite_width": 1,
+                            "sprite_height": 3,
+                            "init_x": 10,
+                            "init_y": 5,
+                            "sprite_data": [ 
+                                [100],
+                                [0],
+                                [0]
+                            ]
+                        },
+                        {
+                            "name": "2",
+                            "sprite_width": 3,
+                            "sprite_height": 1,
+                            "init_x": 9,
+                            "init_y": 8,
+                            "sprite_data": [ 
+                                [100, 100, 100]
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
