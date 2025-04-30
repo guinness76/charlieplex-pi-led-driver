@@ -3,7 +3,7 @@
     "frames": [
         {
             "enabled": true,
-            "duration_ms": 250,
+            "duration_ms": 100,
             "iterations": -1,
             "animations": [
                 {
