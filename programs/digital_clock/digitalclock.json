@@ -1,0 +1,16 @@
+{
+    "repeating": true,
+    "frames": [
+        {
+            "enabled": true,
+            "duration_ms": 1000,
+            "iterations": 1,
+            "animations": [
+                {
+                    "name": "digital-clock"
+                }
+                
+            ]
+        }
+    ]    
+}

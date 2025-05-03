@@ -13,8 +13,8 @@
                     "sprites": [
                         {
                             "name": "static sprite",
-                            "start_x": 10,
-                            "start_y": 6,
+                            "init_x": 10,
+                            "init_y": 6,
                             "sprite_width": 3,
                             "sprite_height": 3,
                             "sprite_data": [ 

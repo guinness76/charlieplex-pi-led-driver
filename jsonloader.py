@@ -12,6 +12,7 @@ from programs.sinewave.sinewave import Sinewave
 from programs.clock.clock import Clock
 from programs.snake.snake import Snake
 from programs.marquee.marquee import Marquee
+from programs.digital_clock.digitalclock import DigitalClock
 
 class JsonLoader:
     i2c = None
@@ -141,6 +142,8 @@ class JsonLoader:
                 init_x = animation_config['init_x']
                 init_y = animation_config['init_y']
                 piFrame.animations.append(Clock(init_x, init_y))
+            elif "digital-clock" == name:
+                piFrame.animations.append(DigitalClock())
             elif "marquee" == name:
                 message = animation_config['message']
                 piFrame.animations.append(Marquee(message, sprites, self.character_map))
@@ -150,4 +153,4 @@ class JsonLoader:
                 length = animation_config['length']
                 piFrame.animations.append(Snake(init_x, init_y, length))
             else:
-                print("Warning! Animation '%s' was not found in pwm.py" % name)
+                print("Warning! Animation '%s' was not found in jsonloader.py" % name)
