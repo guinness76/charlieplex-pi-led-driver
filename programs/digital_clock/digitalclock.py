@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 from animation import Animation
+import piutils
 
 class DigitalClock(Animation):
     def __init__(self):
@@ -16,17 +17,20 @@ class DigitalClock(Animation):
         the_time = now.strftime("%H%M")
         seconds = now.strftime("%S")
 
-        # TODO Draw the seconds dots on the bottom
+        # Draw the seconds dots on the bottom
+        piutils.fill_area(display, 0, 7, 15, 8, 0)
         indicator = int(seconds)
         
-        # if indicator <= 15:
-        #     display.pixel(indicator, 7, 25)
-        # elif indicator > 15 and indicator <= 30:
-        #     display.pixel(indicator-15, 8, 25)
-        # elif indicator > 30 and indicator <= 45:
-        #     display.pixel(indicator-30, 7, 0)
-        # else:
-        #     display.pixel(indicator-45, 8, 0)
+        if indicator <= 15:
+            piutils.draw_line(display, 0, 7, indicator, 7, 25)
+        elif indicator > 15 and indicator <= 30:
+            piutils.draw_line(display, 0, 7, 15, 7, 25)
+            piutils.draw_line(display, 0, 8, indicator-15, 8, 25)
+        elif indicator > 30 and indicator <= 45:
+            piutils.draw_line(display, indicator-30, 7, 15, 7, 25)
+            piutils.draw_line(display, 0, 8, 15, 8, 25)
+        else:
+            piutils.draw_line(display, indicator-45, 8, 15, 8, 25)
         
 
         # Don't update the numbers if hours and minutes did not change

@@ -133,11 +133,8 @@ class JsonLoader:
                 invert = animation_config['invert']
                 piFrame.animations.append(Sinewave(init_x, init_y, max_x, max_y, invert))
             elif "animate_test" == name:
-                init_x = animation_config['init_x']
-                init_y = animation_config['init_y']
-                max_x = animation_config['max_x']
-                max_y = animation_config['max_y']
-                piFrame.animations.append(AnimateTest(init_x, init_y, max_x, max_y))
+                lines = animation_config['lines']
+                piFrame.animations.append(AnimateTest(lines))
             elif "clock" == name:
                 init_x = animation_config['init_x']
                 init_y = animation_config['init_y']

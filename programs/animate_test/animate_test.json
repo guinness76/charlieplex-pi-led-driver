@@ -3,15 +3,46 @@
     "frames": [
         {
             "enabled": true,
-            "duration_ms": 100,
+            "duration_ms": 200,
             "iterations": 1,
             "animations": [
                 {
                     "name": "animate_test",
-                    "init_x": 0,
-                    "init_y": 0,
-                    "max_x": 6,
-                    "max_y": 8
+                    "lines": [
+                        {
+                            "comment": "top left to bottom right",
+                            "init_x": 4,
+                            "init_y": 0,
+                            "max_x": 12,
+                            "max_y": 8,
+                            "brightness": 25
+                        },
+                        {
+                            "comment": "top right to bottom left",
+                            "init_x": 12,
+                            "init_y": 0,
+                            "max_x": 4,
+                            "max_y": 8,
+                            "brightness": 25
+                        },
+                        {
+                            "comment": "vertical line",
+                            "init_x": 8,
+                            "init_y": 0,
+                            "max_x": 8,
+                            "max_y": 8,
+                            "brightness": 25
+                        },
+                        {
+                            "comment": "horizontal line",
+                            "init_x": 4,
+                            "init_y": 4,
+                            "max_x": 12,
+                            "max_y": 4,
+                            "brightness": 25
+                        }
+                    ]
+                    
                 }
             ]
         }

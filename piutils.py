@@ -43,3 +43,70 @@ class UpcomingDirChange():
     def to_string(self):
         return "'id=%d, x=%d, y=%d, translate_x=%d, translate_y=%d'" \
             % (self.id, self.x, self.y, self.translate_x, self.translate_y)
+    
+
+# Draws a one-pixel-wide line on the display. The line can be horizontal, vertical, or diagonal.
+# https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+def draw_line(display, start_x, start_y, end_x, end_y, brightness):
+    if abs(end_y - start_y) < abs(end_x - start_x):
+        if start_x > end_x:
+            draw_line_low(display, end_x, end_y, start_x, start_y, brightness)
+        else:
+            draw_line_low(display, start_x, start_y, end_x, end_y, brightness)
+    else:
+        if start_y > end_y:
+            draw_line_high(display, end_x, end_y, start_x, start_y, brightness)
+        else:
+            draw_line_high(display, start_x, start_y, end_x, end_y, brightness)
+
+
+# Handles line slopes that are between 0 and 1
+def draw_line_low(display, start_x, start_y, end_x, end_y, brightness):
+    dx = end_x - start_x
+    dy = end_y - start_y
+
+    yi = 1
+    if dy < 0:
+        yi = -1
+        dy = -dy
+
+    # Multiply by 2 to keep everything as integers
+    D = (2 * dy) - dx
+    y = start_y    
+
+    for x in range(start_x, end_x + 1):
+        display.pixel(x, y, brightness)
+        if D > 0:
+            y = y + yi
+            D = D + (2 * (dy - dx))
+        else:
+            D = D + (2 * dy)    
+
+# Handles line slopes that are greater than 1
+def draw_line_high(display, start_x, start_y, end_x, end_y, brightness):
+    dx = end_x - start_x
+    dy = end_y - start_y
+
+    xi = 1
+    if dx < 0:
+        xi = -1
+        dx = -dx
+
+    # Multiply by 2 to keep everything as integers
+    D = (2 * dx) - dy
+    x = start_x    
+
+    for y in range(start_y, end_y + 1):
+        display.pixel(x, y, brightness)
+        if D > 0:
+            x = x + xi
+            D = D + (2 * (dx - dy))
+        else:
+            D = D + (2 * dx)  
+
+
+# Fills in a rectangular area on the display
+def fill_area(display, start_x, start_y, end_x, end_y, brightness):
+    for i in range(start_x, end_x+1):
+        for j in range(start_y, end_y+1):
+            display.pixel(i, j, brightness)
