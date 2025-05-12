@@ -11,7 +11,6 @@ class PiFrame:
 
     def __init__(self, display):
         self.display = display
-        self.static_data = []   # todo replace the static data with the background
         self.background = None
         self.duration_ms = -1
         self.iterations = 1
@@ -112,8 +111,8 @@ class PiFrame:
                 self.drawUsingFrameData(transformed_data)
                 self.current_iteration = self.current_iteration + 1
             else:
-                # Display the static frame data
-                self.drawUsingFrameData(self.static_data)
+                # Display the static background
+                self.drawUsingFrameData(self.background)
                 self.current_iteration = self.current_iteration + 1
 
             sleep(self.duration_ms / 1000)
@@ -148,8 +147,8 @@ class PiFrame:
             self.drawUsingFrameData(transformed_data)
             self.current_iteration = self.current_iteration + 1
         else:
-            # Display the static frame data
-            self.drawUsingFrameData(self.static_data)
+            # Display the static background
+            self.drawUsingFrameData(self.background)
             self.current_iteration = self.current_iteration + 1
      
         self.incrementNextFrameId()

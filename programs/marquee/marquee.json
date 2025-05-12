@@ -9,9 +9,10 @@
                 {
                     "name": "marquee",
                     "message": " {cat1}",
+                    "trigger_sprites_on_x": 7,
                     "sprites": [
                         {
-                            "name": "1",
+                            "name": "drop_1",
                             "sprite_width": 1,
                             "sprite_height": 3,
                             "init_x": 10,
@@ -23,7 +24,7 @@
                             ]
                         },
                         {
-                            "name": "2",
+                            "name": "drop_2",
                             "sprite_width": 3,
                             "sprite_height": 1,
                             "init_x": 9,
@@ -33,6 +34,17 @@
                             ]
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "enabled": true,
+            "duration_ms": 50,
+            "iterations": 1,
+            "animations": [
+                {
+                    "name": "marquee",
+                    "message": " Bad kitty!"
                 }
             ]
         }

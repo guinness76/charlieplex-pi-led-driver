@@ -3,11 +3,12 @@ from animation import Animation
 from transform import Translation
 
 class Marquee(Animation):
-    def __init__(self, message, other_sprites, character_map):
+    def __init__(self, message, other_sprites, trigger_sprites_on_x, character_map):
         self.name = "marquee"
         self.message = message
         self.acc_x = 0
         self.max_x = 0
+        self.trigger_sprites_on_x = trigger_sprites_on_x
         self.character_map = character_map
         self.message_sprites = []
         self.other_sprites = other_sprites
@@ -56,8 +57,8 @@ class Marquee(Animation):
             current_row = current_row + 1
             self.message_sprites.append(full_row)
 
-        # self.max_x = total_len
-        self.max_x = len(sprites[0])-2
+        self.max_x = total_len
+        # self.max_x = len(sprites[0])-2 # Specifically for poo emoji
         self.translation = Translation(self.max_x, 9, -1, 0, self.message_sprites, False)
 
     def reset(self):
@@ -77,8 +78,8 @@ class Marquee(Animation):
                 display.pixel(j, i, brightness)
 
         self.acc_x = self.acc_x + 1
-        if self.acc_x >= self.max_x:
-            # Draw the extra sprites here
+        if len(self.other_sprites) > 0 and self.trigger_sprites_on_x > 0 and self.acc_x == self.trigger_sprites_on_x:
+            # Draw and animate the "other" sprites here that were specified in the json file
             poo_sprite = self.other_sprites[0]
             poo_translate = Translation(1, 3, 0, 1, poo_sprite.sprite_data, False)
             self.draw_other_sprite(display, poo_sprite, poo_translate.static_data)
@@ -90,11 +91,10 @@ class Marquee(Animation):
 
             plop_sprite = self.other_sprites[1]
             self.draw_other_sprite(display, plop_sprite, plop_sprite.sprite_data)
-            sleep(1)
-            
-            # for i in range(0, len(self.other_sprites)):
-            #     self.draw_other_sprite(display, self.other_sprites[i])
-            #     sleep(.1)
+            sleep(0.5)
+        
+            return True
+        elif self.acc_x >= self.max_x:
             return True
         else:
             return False

@@ -3,7 +3,7 @@
     "frames": [
         {
             "enabled": true,
-            "duration_ms": 200,
+            "duration_ms": 1000,
             "iterations": 1,
             "animations": [
                 {
@@ -40,6 +40,47 @@
                             "max_x": 12,
                             "max_y": 4,
                             "brightness": 25
+                        }
+                    ]
+                    
+                }
+            ]
+        },
+        {
+            "enabled": false,
+            "duration_ms": 200,
+            "iterations": 1,
+            "animations": [
+                {
+                    "name": "animate_test",
+                    "lines": [
+                        {
+                            "init_x": 0,
+                            "init_y": 0,
+                            "max_x": 7,
+                            "max_y": 0,
+                            "brightness": 100
+                        },
+                        {
+                            "init_x": 0,
+                            "init_y": 7,
+                            "max_x": 7,
+                            "max_y": 7,
+                            "brightness": 100
+                        },
+                        {
+                            "init_x": 0,
+                            "init_y": 0,
+                            "max_x": 0,
+                            "max_y": 7,
+                            "brightness": 100
+                        },
+                        {
+                            "init_x": 7,
+                            "init_y": 0,
+                            "max_x": 7,
+                            "max_y": 7,
+                            "brightness": 100
                         }
                     ]
                     
