@@ -1,5 +1,5 @@
 import random
-from animation import Animation, Sprite
+from animation import Animation
 
 class BouncySprite(Animation):
     def __init__(self, init_x, init_y, the_sprite):
@@ -22,8 +22,6 @@ class BouncySprite(Animation):
             self.current_y = random.randint(2, 6)
 
     def draw_frame(self, display, hardware_buffering):
-        # print("Drawing on frame %d" % display._frame)
-
         if (self.delta_x == 0 and self.delta_y == 0):
             self.draw_ball(display, False)
             # Just starting out. Send the ball bouncing down and to the right 
@@ -47,13 +45,10 @@ class BouncySprite(Animation):
                 self.delta_y = -self.delta_y
                 self.current_y = self.current_y + self.delta_y
 
-            # Draw the trap
-            # self.draw_trap(display)
-
             # Finally, draw the ball
             self.draw_ball(display, False)
 
-            return self.in_trap(display)
+            return False
 
 
     def draw_ball(self, display, do_undraw):
@@ -78,27 +73,5 @@ class BouncySprite(Animation):
                 sprite_current_x = sprite_current_x + 1
 
             sprite_current_x = 0
-            sprite_current_y = sprite_current_y + 1
-
-    def draw_trap(self, display):
-        for i in range(self.trapx_min, self.trapx_max + 1):
-            display.pixel(i, self.trapy_min, 50)
-
-        display.pixel(self.trapx_min, 7, 50)
-        display.pixel(self.trapx_max, 7, 50)    
-
-        for i in range(self.trapx_min, self.trapx_max + 1):
-            display.pixel(i, self.trapy_max, 50)
-
-
-    def in_trap(self, display):
-        in_trap = False
-        # if (self.current_x >= self.trapx_min and self.current_x <= self.trapx_max):
-        #     if (self.current_y >= self.trapy_min and self.current_y <= self.trapy_max):
-        #         # Ball has fallen into trap. Stop the animation
-        #         print("Ball has fallen into trap!")
-        #         display.fill(0)
-        #         in_trap = True
-
-        return in_trap    
+            sprite_current_y = sprite_current_y + 1  
     

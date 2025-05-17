@@ -104,6 +104,7 @@ class Snake(Animation):
             if mixel.pos_x < 0 or mixel.pos_x > 15 or mixel.pos_y < 0 or mixel.pos_y > 9:
                 print("Some kind of problem here. mixel.id=%s, mixel.pos_x=%d, mixel.pos_y=%d, next_x=%d, next_y=%d" \
                       % (mixel.id, mixel.pos_x, mixel.pos_y, next_x, next_y))
+                # A debug breakpoint is placed here as needed
                 deadbeef = 0
 
             if self.trace:
@@ -179,13 +180,6 @@ class Snake(Animation):
         if self.trace:
             print("maybeNewDirection() start: up_ok=%s, down_ok=%s, left_ok=%s, right_ok=%s, translate_x=%d, translate_y=%d" % \
                   (up_ok, down_ok, left_ok, right_ok, translate_x, translate_y))
-        # TODO Hardcode this until we can figure it out
-        # if next_x == 8 and next_y == 8:
-        #     # Right now, mixel.pos_x == 9 and mixel.pos_y == 8. It is ignoring next_x when it works.
-        #     # Maybe you can only change one direction (x or y) at a time, but not both.
-        #     return self.MixelChange(mixel.pos_x, mixel.pos_y-1, 0, -1)
-        # else:
-        #     return None
 
         random_direction = random.randint(0, 16)
         if random_direction <= 3:

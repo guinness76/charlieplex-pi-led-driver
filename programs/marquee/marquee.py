@@ -9,6 +9,16 @@ class Marquee(Animation):
         self.acc_x = 0
         self.max_x = 0
         self.trigger_sprites_on_x = trigger_sprites_on_x
+        self.poo_sprite_x = -1
+        self.poo_sprite_y = -1
+
+        if len(other_sprites) > 0:
+            self.poo_sprite_x = other_sprites[0].init_x
+            self.poo_sprite_y = other_sprites[0].init_y
+            self.poo_translate = Translation(1, 3, 0, 1, other_sprites[0].sprite_data, False)
+        else:
+            self.poo_translate = None
+
         self.character_map = character_map
         self.message_sprites = []
         self.other_sprites = other_sprites
@@ -66,36 +76,39 @@ class Marquee(Animation):
         self.translation.reset()
 
     def draw_frame(self, display, hardware_buffering):        
-        data = self.translation.do_transform()
-
-        # i is rows, j is values within that row
-        for i in range(0, len(data)):
-            row = data[i]
-            for j in range(0, len(row)):
-                brightness = data[i][j]
-
-                display.pixel(j, i, brightness)
-
         self.acc_x = self.acc_x + 1
-        if len(self.other_sprites) > 0 and self.trigger_sprites_on_x > 0 and self.acc_x == self.trigger_sprites_on_x:
+        if self.poo_translate is not None and self.trigger_sprites_on_x > 0 and self.acc_x > self.trigger_sprites_on_x:
             # Draw and animate the "other" sprites here that were specified in the json file
             poo_sprite = self.other_sprites[0]
-            poo_translate = Translation(1, 3, 0, 1, poo_sprite.sprite_data, False)
-            self.draw_other_sprite(display, poo_sprite, poo_translate.static_data)
-            sleep(.2)
-            self.draw_other_sprite(display, poo_sprite, poo_translate.do_transform())
-            sleep(.2)
-            self.draw_other_sprite(display, poo_sprite, poo_translate.do_transform())
-            sleep(.2)
 
-            plop_sprite = self.other_sprites[1]
-            self.draw_other_sprite(display, plop_sprite, plop_sprite.sprite_data)
-            sleep(0.5)
-        
-            return True
+            if poo_sprite.init_y == self.poo_sprite_y:
+                self.draw_other_sprite(display, poo_sprite, self.poo_translate.static_data)
+                self.poo_sprite_y = self.poo_sprite_y + 1
+                return False
+            elif self.poo_sprite_y - poo_sprite.init_y == 1 or self.poo_sprite_y - poo_sprite.init_y == 2:
+                self.draw_other_sprite(display, poo_sprite, self.poo_translate.do_transform())
+                self.poo_sprite_y = self.poo_sprite_y + 1
+                return False
+            else:
+                # Draw the plop. This is also the "animation is done" condition.
+                plop_sprite = self.other_sprites[1]
+                self.draw_other_sprite(display, plop_sprite, plop_sprite.sprite_data)
+                sleep(0.5)  # Allow a bit of time to gasp in horror at the poop
+                return True
         elif self.acc_x >= self.max_x:
             return True
         else:
+            # Draw the kitty
+            data = self.translation.do_transform()
+
+            # i is rows, j is values within that row
+            for i in range(0, len(data)):
+                row = data[i]
+                for j in range(0, len(row)):
+                    brightness = data[i][j]
+
+                    display.pixel(j, i, brightness)
+
             return False
         
     def draw_other_sprite(self, display, sprite, data):

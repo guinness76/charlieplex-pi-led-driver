@@ -71,16 +71,16 @@ class JsonLoader:
                     else:
                         piFrame.set_first_iteration(1)
 
-                    loop_backgrond = False
+                    loop_background = False
                     if "loop_static_data" in transform_json:
-                        loop_backgrond = transform_json["loop_static_data"]
+                        loop_background = transform_json["loop_static_data"]
 
                     translation = Translation(piFrame.width, 
                                                 piFrame.height, 
                                                 transform_json["translate_x"], 
                                                 transform_json["translate_y"],
                                                 piFrame.background,
-                                                loop_backgrond)
+                                                loop_background)
                     
                     piFrame.transform = translation
             

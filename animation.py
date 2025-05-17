@@ -13,6 +13,10 @@ class Animation():
     # assume you are working with an empty frame. But a value of False indicates that all the pixels from the
     # previous PiFrame are still on the current hardware frame of the display. Thus, you have to set some pixels
     # to 0 on the display to implement animation.
+    #
+    # Returns True if the program has internally fulfilled all the conditions to exit. Some programs will exit
+    # after certain conditions have been met (such as x number of lines have been drawn). All the animations
+    # in the current frame will execute, but a new frame will not be started. The program will exit instead.
     def draw_frame(display, hardware_buffering):
         pass
 
