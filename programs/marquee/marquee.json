@@ -4,7 +4,6 @@
         {
             "enabled": true,
             "duration_ms": 150,
-            "iterations": 1,
             "animations": [
                 {
                     "name": "marquee",
@@ -13,8 +12,6 @@
                     "sprites": [
                         {
                             "name": "drop_1",
-                            "sprite_width": 1,
-                            "sprite_height": 3,
                             "init_x": 10,
                             "init_y": 5,
                             "sprite_data": [ 
@@ -25,8 +22,6 @@
                         },
                         {
                             "name": "drop_2",
-                            "sprite_width": 3,
-                            "sprite_height": 1,
                             "init_x": 9,
                             "init_y": 8,
                             "sprite_data": [ 
@@ -40,7 +35,6 @@
         {
             "enabled": true,
             "duration_ms": 50,
-            "iterations": 1,
             "animations": [
                 {
                     "name": "marquee",

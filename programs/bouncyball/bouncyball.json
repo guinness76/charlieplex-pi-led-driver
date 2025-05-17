@@ -4,7 +4,6 @@
         {
             "enabled": true,
             "duration_ms": 100,
-            "iterations": -1,
             "animations": [
                 {
                     "name": "bouncy ball",
@@ -15,8 +14,6 @@
                             "name": "static sprite",
                             "init_x": 10,
                             "init_y": 6,
-                            "sprite_width": 3,
-                            "sprite_height": 3,
                             "sprite_data": [ 
                             [50,  50,  50],
                             [50,   0,  50],

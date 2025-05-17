@@ -4,7 +4,6 @@
         {
             "enabled": true,
             "duration_ms": 150,
-            "iterations": -1,
             "animations": [
                 {
                     "name": "bouncy sprite",
@@ -13,8 +12,6 @@
                     "sprites": [
                         {
                             "name": "sphere",
-                            "sprite_width": 5,
-                            "sprite_height": 5,
                             "init_x": -1,
                             "init_y": -1,
                             "sprite_data": [ 
@@ -26,7 +23,6 @@
                             ]
                         }
                     ]
-                    
                 },
                 {
                     "name": "bouncy sprite",
@@ -35,8 +31,6 @@
                     "sprites": [
                         {
                             "name": "triangle",
-                            "sprite_width": 5,
-                            "sprite_height": 3,
                             "init_x": -1,
                             "init_y": -1,
                             "sprite_data": [ 
@@ -53,7 +47,6 @@
         {
             "enabled": false,
             "duration_ms": 250,
-            "iterations": -1,
             "animation": {
                 "name": "bouncy sprite",
                 "init_x": 3,
@@ -61,8 +54,6 @@
                 "sprites": [
                     {
                         "name": "heart",
-                        "sprite_width": 7,
-                        "sprite_height": 5,
                         "init_x": -1,
                         "init_y": -1,
                         "sprite_data": [

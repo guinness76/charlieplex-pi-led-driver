@@ -17,9 +17,10 @@ class Animation():
         pass
 
 class Sprite():
-    def __init__(self, sprite_width, sprite_height, sprite_data, init_x, init_y):
+    def __init__(self, sprite_data, init_x, init_y):
+        # todo throw error if sprite is empty
         self.sprite_data = sprite_data
-        self.sprite_width = sprite_width
-        self.sprite_height = sprite_height
+        self.sprite_width = len(sprite_data[0])
+        self.sprite_height = len(sprite_data)
         self.init_x = init_x
         self.init_y = init_y

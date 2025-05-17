@@ -57,8 +57,32 @@ class JsonLoader:
 
             background_found = False 
             if "background" in frame.keys():
-                piFrame.background = frame["background"]
+                background_json = frame["background"]
+                piFrame.background = background_json["data"]
                 background_found = True
+
+                if "transform" in background_json:
+                    transform_json = background_json["transform"]
+
+                    # Controls whether to display the actual pattern in the frame (0), or just
+                    # skip it and run the transform first before displaying anything (1)
+                    if transform_json["display_before_transform"]:
+                        piFrame.set_first_iteration(0)
+                    else:
+                        piFrame.set_first_iteration(1)
+
+                    loop_backgrond = False
+                    if "loop_static_data" in transform_json:
+                        loop_backgrond = transform_json["loop_static_data"]
+
+                    translation = Translation(piFrame.width, 
+                                                piFrame.height, 
+                                                transform_json["translate_x"], 
+                                                transform_json["translate_y"],
+                                                piFrame.background,
+                                                loop_backgrond)
+                    
+                    piFrame.transform = translation
             
             animation_found = False
             if "animations" in frame.keys():
@@ -66,34 +90,8 @@ class JsonLoader:
                 self.load_animations(piFrame, animations)
                 animation_found = True
             
-            transform_found = False
-            if "transform" in frame.keys():
-                transform_json = frame["transform"]
-                transform_found = True
-
-                # Controls whether to display the actual pattern in the frame (0), or just
-                # skip it and run the transform first before displaying anything (1)
-                if transform_json["display_before_transform"]:
-                    piFrame.set_first_iteration(0)
-                else:
-                    piFrame.set_first_iteration(1)
-
-                if transform_json["type"] == "translation":
-                    loop_backgrond = False
-                    if "loop_static_data" in transform_json:
-                        loop_backgrond = transform_json["loop_static_data"]
-
-                    translation = Translation(piFrame.width, 
-                                              piFrame.height, 
-                                              transform_json["translate_x"], 
-                                              transform_json["translate_y"],
-                                              piFrame.background,
-                                              loop_backgrond)
-                    
-                    piFrame.transform = translation
-
-            if not background_found and not animation_found and not transform_found: 
-                print("Warning! Neither a background nor a transform nor any animations were defined in json file.")
+            if not background_found and not animation_found: 
+                print("Warning! Neither a background nor any animations were defined in json file.")
 
             piFrames.append(piFrame)    
 
@@ -106,13 +104,11 @@ class JsonLoader:
                 json_sprites = animation_config["sprites"]
 
                 for json_sprite in json_sprites:
-                    json_sprite_width = json_sprite["sprite_width"]
-                    json_sprite_height = json_sprite["sprite_height"]
                     json_sprite_data = json_sprite["sprite_data"]
                     init_x = json_sprite["init_x"]
                     init_y = json_sprite["init_y"]
 
-                    sprite = Sprite(json_sprite_width, json_sprite_height, json_sprite_data, init_x, init_y)
+                    sprite = Sprite(json_sprite_data, init_x, init_y)
                     sprites.append(sprite)
                     
             name = animation_config["name"]

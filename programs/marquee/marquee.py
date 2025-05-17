@@ -58,7 +58,6 @@ class Marquee(Animation):
             self.message_sprites.append(full_row)
 
         self.max_x = total_len
-        # self.max_x = len(sprites[0])-2 # Specifically for poo emoji
         self.translation = Translation(self.max_x, 9, -1, 0, self.message_sprites, False)
 
     def reset(self):

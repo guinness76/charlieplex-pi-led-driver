@@ -4,7 +4,6 @@
         {
             "enabled": true,
             "duration_ms": 1000,
-            "iterations": 1,
             "animations": [
                 {
                     "name": "animate_test",
@@ -49,7 +48,6 @@
         {
             "enabled": false,
             "duration_ms": 200,
-            "iterations": 1,
             "animations": [
                 {
                     "name": "animate_test",

@@ -4,7 +4,6 @@
         {
             "enabled": true,
             "duration_ms": 100,
-            "iterations": 1,
             "animations": [
                 {
                     "name": "sinewave",
@@ -19,7 +18,6 @@
         {
             "enabled": true,
             "duration_ms": 100,
-            "iterations": 1,
             "animations": [
                 {
                     "name": "sinewave",
@@ -34,7 +32,6 @@
         {
             "enabled": true,
             "duration_ms": 100,
-            "iterations": 1,
             "animations": [
                 {
                     "name": "sinewave",
@@ -49,7 +46,6 @@
         {
             "enabled": true,
             "duration_ms": 100,
-            "iterations": 1,
             "animations": [
                 {
                     "name": "sinewave",
