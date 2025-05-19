@@ -1,3 +1,5 @@
+# Displays a circular background and then two clock hands in the display. The hands are manually drawn
+# in the draw_frame() function. This isn't a real time clock, it runs the 12 hour cycle one second at a time.
 from animation import Animation
 
 class Clock(Animation):
@@ -7,7 +9,7 @@ class Clock(Animation):
         self.current_y = init_y
         self.current_time = 11
 
-    def draw_frame(self, display, hardware_buffering):
+    def draw_frame(self, display):
         brightness = 100
         display.pixel(self.current_x, self.current_y, brightness)
 

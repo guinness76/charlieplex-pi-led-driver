@@ -43,29 +43,15 @@ frames = config['piframes']
 repeating = config['repeating']
 
 try:
-    hardware_buffering = False
     pwm.display.sleep(True)
+    pwm.display.frame(0, True)
+    pwm.display.sleep(False)
 
-    if not hardware_buffering:
-        pwm.display.frame(0, True)
-        pwm.display.sleep(False)
-
-    # for i in range(0, 8):
-    #     pwm.display.frame(i, False)
-    #     pwm.display.fill(0)
     running = True
-    print("*** Hardware buffering set to %s***" % str(hardware_buffering))
     
     while running:
         for frame in frames:
-
-            # This is the first iteration, so run this synchronously
-            frame.buildBufferedFrame(0)
-            
-            if hardware_buffering:
-                frame.runPiFrame()
-            else:
-                frame.runNonBufferedPiFrame()
+            frame.runNonBufferedPiFrame()
 
         running = repeating
         if repeating:

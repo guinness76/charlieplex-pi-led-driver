@@ -1,9 +1,11 @@
 import random
 from animation import Animation
 
+# Bounces a single sprite across the display. Configure multiple bouncy sprites in the .json file to
+# display more than 1 moving sprite on the display at once.
 class BouncySprite(Animation):
     def __init__(self, init_x, init_y, the_sprite):
-        self.name = "bouncy ball"
+        self.name = "bouncy sprite"
         self.current_x = init_x
         self.current_y = init_y
         self.delta_x = 0
@@ -21,19 +23,19 @@ class BouncySprite(Animation):
         if init_y == -1:
             self.current_y = random.randint(2, 6)
 
-    def draw_frame(self, display, hardware_buffering):
+    def draw_frame(self, display):
         if (self.delta_x == 0 and self.delta_y == 0):
-            self.draw_ball(display, False)
+            self.draw_sprite(display, False)
             # Just starting out. Send the ball bouncing down and to the right 
             self.delta_x = 1
             self.delta_y = 1
 
             return False
         else:
-            if not hardware_buffering:
-                self.draw_ball(display, True)
+            # Clear out the pixels of the old sprite before drawing the new one
+            self.draw_sprite(display, True)
 
-            # Update the ball to the next position
+            # Update the sprite to the next position
             self.current_x = self.current_x + self.delta_x
             self.current_y = self.current_y + self.delta_y
 
@@ -45,14 +47,14 @@ class BouncySprite(Animation):
                 self.delta_y = -self.delta_y
                 self.current_y = self.current_y + self.delta_y
 
-            # Finally, draw the ball
-            self.draw_ball(display, False)
+            # Finally, draw the sprite
+            self.draw_sprite(display, False)
 
             return False
 
 
-    def draw_ball(self, display, do_undraw):
-        # The current_x and current_y coordinates should hold the current center of the ball.
+    def draw_sprite(self, display, do_undraw):
+        # The current_x and current_y coordinates should hold the current center of the sprite.
         # We will translate the sprite data based on that
         min_x = self.current_x - int(self.sprite.sprite_width / 2)
         max_x = self.current_x + int(self.sprite.sprite_width / 2)

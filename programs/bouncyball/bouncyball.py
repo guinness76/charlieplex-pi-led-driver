@@ -1,3 +1,5 @@
+# Simple animation that bounces a single pixel "ball" across the display until it contacts a square "trap"
+# on the display. Then the program exits.
 import random
 from animation import Animation
 
@@ -20,7 +22,7 @@ class BouncyBall(Animation):
         if init_y == -1:
             self.current_y = random.randint(0, 7)
 
-    def draw_frame(self, display, hardware_buffering):
+    def draw_frame(self, display):
         if (self.delta_x == 0 and self.delta_y == 0):
             self.draw_ball(display)
             # Just starting out. Send the ball bouncing down and to the right 
@@ -29,8 +31,8 @@ class BouncyBall(Animation):
 
             return False
         else:
-            if not hardware_buffering:
-                self.undraw_ball(display)
+            self.undraw_ball(display)
+            
             # Update the ball to the next position
             self.current_x = self.current_x + self.delta_x
             self.current_y = self.current_y + self.delta_y

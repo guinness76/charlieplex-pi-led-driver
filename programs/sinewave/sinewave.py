@@ -1,5 +1,8 @@
+# Simulates a ball bouncing on the ground and gradually slowing down. The ball's path is modeled as a sine wave
+# function.
 from animation import Animation
 import math
+import time
 
 class Sinewave(Animation):
     def __init__(self, init_x, init_y, max_x, max_y, invert):
@@ -20,12 +23,15 @@ class Sinewave(Animation):
         self.acc_x = 0   
         self.current_y = self.init_y
 
-    def draw_frame(self, display, hardware_buffering):
+    def draw_frame(self, display):
         # Undraw the current pixel
         if (self.current_x-1 >= 0):
             display.pixel(self.current_x-1, self.current_y, 0)
         else:
             display.pixel(0, self.current_y, 0)
+
+        if self.acc_x == 0:
+            display.pixel(15, 8, 0)
 
         y = math.sin(((self.acc_x)/self.acc_xmax) * math.pi)
         plottable_y = y * self.max_y
@@ -36,15 +42,10 @@ class Sinewave(Animation):
         else:
             self.current_y = int(round(plottable_y))
 
-        # print("current_x=%d, y=%f, plottable_y=%f, current_y=%d" 
-        #       % (self.current_x, y, plottable_y, self.current_y))
-        
-        
         display.pixel(self.current_x, self.current_y, 50)
 
         self.acc_x = self.acc_x + 1
         self.current_x = self.current_x + 1
-        # self.current_y = self.current_y + 1
 
         if self.current_x > self.max_x:
             return True

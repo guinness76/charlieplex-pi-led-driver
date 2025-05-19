@@ -1,3 +1,4 @@
+# Displays a 6-pixel-long snake roaming across the display and randomly changing directions.
 import random
 from animation import Animation
 from piutils import Mixel
@@ -40,7 +41,7 @@ class Snake(Animation):
         super().reset()
          
 
-    def draw_frame(self, display, hardware_buffering):
+    def draw_frame(self, display):
         head = len(self.pos)-1
 
         # Remember that we are starting from opposite side of the origin coordinates and working our

@@ -1,3 +1,5 @@
+# Uses the resources/characters.json file to display a moving marquee of text. This example also combines
+# an image of a cat and some animation, before displaying the scrolling message about the bad kitty.
 from time import sleep
 from animation import Animation
 from transform import Translation
@@ -75,7 +77,7 @@ class Marquee(Animation):
         self.acc_x = 0  
         self.translation.reset()
 
-    def draw_frame(self, display, hardware_buffering):        
+    def draw_frame(self, display):        
         self.acc_x = self.acc_x + 1
         if self.poo_translate is not None and self.trigger_sprites_on_x > 0 and self.acc_x > self.trigger_sprites_on_x:
             # Draw and animate the "other" sprites here that were specified in the json file

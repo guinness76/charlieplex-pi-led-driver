@@ -1,3 +1,4 @@
+# Simple program that displays some lines on the display. The lines to display are configured in the .json file.
 from animation import Animation
 import piutils
 
@@ -10,7 +11,7 @@ class AnimateTest(Animation):
         super().reset()
          
 
-    def draw_frame(self, display, hardware_buffering):
+    def draw_frame(self, display):
         for line in self.lines:
             init_x = line['init_x']
             init_y = line['init_y']

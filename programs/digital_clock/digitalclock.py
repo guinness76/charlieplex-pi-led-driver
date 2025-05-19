@@ -1,3 +1,6 @@
+# Displays a realtime clock on the display. The values are formatted as a 24-hour clock. This program also
+# features a bar on the bottom that increments one pixel per second for the first 30 seconds. Then it decrements
+# one pixel per second for the last 30 seconds.
 from datetime import datetime
 import json
 from animation import Animation
@@ -13,7 +16,7 @@ class DigitalClock(Animation):
         with open(characters_file, 'r') as the_file:
             self.character_map = json.load(the_file)
 
-    def draw_frame(self, display, hardware_buffering):
+    def draw_frame(self, display):
         now = datetime.now()
         the_time = now.strftime("%H%M")
         seconds = now.strftime("%S")

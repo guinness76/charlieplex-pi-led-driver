@@ -17,12 +17,18 @@ ls /dev/i2c* /dev/spi*
 ```
 
 # Code structure
-The main data structure of this application is the PiFrame, defined in piframe.py. The main loop in charlieplex-driver.py loops over all the frames. For each frame, runPiFrame() or runNonBufferedPiFrame() is called (see the Hardware buffering section below for the differences between these functions). If the "repeating" value is set in the config .json file, the frames loop will continue forever until the entire program is halted (Ctrl-C on a Linux system to kill the program). After all the frames have been executed in a loop, the reset() function is called on each frame. This gives frames a chance to reset their internal data structures to their original values in preparation for the next frame iteration. This comes in handy because animation frames tend to increment internal variables to implement a certain animation.
+The main data structure of this application is the PiFrame, defined in piframe.py. The main loop in charlieplex-driver.py loops over all the frames. For each frame, runNonBufferedPiFrame() is called. If the "repeating" value is set in the config .json file, the frames loop will continue forever until the entire program is halted (Ctrl-C on a Linux system to kill the program). After all the frames have been executed in a loop, the reset() function is called on each frame. This gives frames a chance to reset their internal data structures to their original values in preparation for the next frame iteration. This comes in handy because animation frames tend to increment internal variables to implement a certain animation.
+
+# Static frames vs animations
+Some of the example programs use a matrix of static data for a frame. The static data is defined in a "background" field in the .json file. A transform is then configured in the background to cause the background to "move" across the screen as needed. The transform is applied to each frame to implement the background's movement.
+
+Other example programs extend the Animation class in animation.py. Extending classes implement the `draw_frame()` function, and are passed a `adafruit_is31fl3731.matrix.Matrix` object (the object is called "display" in the calling function). With this display object, you can add any pixels that are needed to implement one frame of animation. You will have to keep track of what you have displayed in internal variables, so that you can properly update the animation on the next frame.
+
+# Combining animation elements
+One of the handy features of these programs is that you can combine a background, one or more sprites, and custom drawn pixels onto the same animation frame. See the `background` and `sprite_data` sections in the config file examples below.
 
 # Hardware buffering
-The Adafruit Charlieplexed IS31FL3731 driver has support for multiple hardware frames. This means that data can be written to one frame while a different frame is displayed. To support this, the PiFrame class is coded to write to these hardware frames if XXX TODO is set to True. The class manages displaying one hardware frame will allowing other classes to write to another hardware frame that is currently invisible. When a new iteration of frames is started, the previously invisible hardware frame will be displayed, and the class will move on to allow other classes to write to a different invisible hardware frame.
-
-In reality, it was found that that using hardware frames seemed to produce a lot more flickering than was expected for some programs. In fact, some programs looked a lot better when multiple hardware frames was *not* used. TODO This is still WIP.
+The Adafruit Charlieplexed IS31FL3731 driver has support for multiple hardware frames. This means that data could be written to one display frame while a different display frame is displayed. In reality, it was found that that using multiple display frames on the IS31FL3731 seemed to produce a lot of flickering and "ghost" pixels to be displayed. Thus, these examples all write to pixels in a single device frame. This does cause more work for the animation code, as pixels that are currently lit may need to have their brightness set to 0 when a new frame is displayed (to produce the illusion of movement).
 
 # Config file properties
 Every program in the programs folder holds a .json file, which defines how the frames are configured. This .json file is supplied as a command line argument when starting charlieplex-driver.py. The .json file is read by jsonloader.py.
