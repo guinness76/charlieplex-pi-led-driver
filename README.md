@@ -9,9 +9,22 @@ Connect the SDA pin on the display to the I2C SDA pin (pin 3 aka GPIO 2) on the 
 In order to use these examples, you have to run these commands on your Raspberry Pi:
 
 ```sh
-# Installs the python libraries needed by the IS31FL3731 driver
-sudo pip3 install adafruit-circuitpython-is31fl3731
-sudo pip3 install adafruit-circuitpython-framebuf
+# Install the python libraries needed by the IS31FL3731 driver. In recent versions of the Pi OS (such as Trixie), the system forces you to use a Python virtual environment before pip can be used to install any Python libraries. This commands were tested in trixie 13.1, which has Python 3.13 installed by default.
+
+## Creating a Python virtual environment
+python -m my-virtual-env
+
+## Using the Python virtual environment. After this is done, the pip commands below can be run.
+source my-virtual-env/bin/activate
+
+## Exiting the Python virtual environment
+deactivate
+
+## The actual pip commands
+pip install adafruit-circuitpython-is31fl3731
+pip install adafruit-circuitpython-framebuf
+pip install Pillow
+pip install RPi.GPIO
 
 # Installs libraries that can be used to troubleshoot I2C comms on the Pi
 sudo apt-get install -y i2c-tools libgpiod-dev python3-libgpiod
