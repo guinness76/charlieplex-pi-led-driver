@@ -1,5 +1,12 @@
 # charlieplex-pi-led-driver
-These examples utilize the `LED Charlieplexed Matrix - 9x16 LEDs` and the `Adafruit 16x9 Charlieplexed PWM LED Matrix Driver - IS31FL3731`, which are both available from https://www.adafruit.com. The driver uses I2C to send pixel draw messages from the Raspberry Pi. In order to use these examples, you have to run these commands on your Raspberry Pi:
+These examples utilize the `LED Charlieplexed Matrix - 9x16 LEDs` and the `Adafruit 16x9 Charlieplexed PWM LED Matrix Driver - IS31FL3731`, which are both available from https://www.adafruit.com. The driver uses I2C to send pixel draw messages from the Raspberry Pi. 
+
+# Installation
+Since the display uses I2C to communicate, you have to ensure that the I2C protocol is enabled on the Pi. To do this, you have to navigate to Preferences -> Raspberry Pi Configuration. Then navigate to the Interfaces tab. Enable the I2C option if it is not currently enabled.
+
+Connect the SDA pin on the display to the I2C SDA pin (pin 3 aka GPIO 2) on the Pi using a jumper wire. Connect the SCL pin to the I2C SCL pin (pin 5 aka GPIO 3) on the Pi. Connect the GND pin to any GND pin on the Pi (I used pin 9). Connect the VCC pin to any 3.3V pin on the Pi (I used pin 17).
+
+In order to use these examples, you have to run these commands on your Raspberry Pi:
 
 ```sh
 # Installs the python libraries needed by the IS31FL3731 driver
